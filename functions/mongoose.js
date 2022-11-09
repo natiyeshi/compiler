@@ -24,4 +24,17 @@ async function mongoSaveFile(id,lang,code,run){
     }
 }
 
-module.exports = {mongoRegister,mongoSaveFile}
+async function lastSubmit(id,val) {
+    try{
+       
+        val -= 1
+        const userName = await mongoRegisterSchema.findOne({_id:id})
+        return {err:false,value:userName.code}
+    } catch(e){
+        console.log(e);
+        return {err:true}
+    } 
+}
+
+
+module.exports = {mongoRegister,mongoSaveFile,lastSubmit}

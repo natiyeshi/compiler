@@ -6,7 +6,9 @@ const session = require('express-session');
 // my modules 
 const runRouter = require('./routers/run');
 const registerRouter = require('./routers/register');
+const lastSubmit = require('./routers/lastSubmit');
 const {checkAuth,regCheck} = require('./functions/checkSession');
+
 // middle wares
 const app = express()
 app.use(bodyParser.urlencoded({extended:true}))
@@ -27,6 +29,7 @@ app.use("/image",express.static(__dirname + "public/image"))
 
 
 // urls 
+app.use("/lastSubmit",checkAuth,lastSubmit)
 app.use("/run",checkAuth,runRouter)
 app.use("/register",regCheck,registerRouter)
 
