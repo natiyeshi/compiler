@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        .main{
+            height: 100vh;
+            max-width: 100%;
+            display: grid;
+            justify-content: center;
+            place-items: center;
+            background-image:url('image/Bubble-Background.svg') ;
+        }
+        .main-file{
+            text-align: center;
+        }
+        input{
+            text-decoration: none;
+            text-decoration-style: none;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+
+        <div class="main-file">
+           <span class="text text-light fs-2 fw-bold"> Tell us ur name </span>
+            <input type="text" name="name" id="name" class="p-1 rounded-1 border-0" placeholder=" name">
+            <input type="submit" class="btn btn-primary" value="submit" id="submit">
+
+        </div>
+        
+    </div>
+    
+
+  </body>
+</html>
+<script>
+    const submit = document.querySelector("#submit")
+    const name = document.querySelector("#name")
+    submit.addEventListener("click",()=>{
+        sendName(name.value)
+    })
+
+    let sendName = (name)=>{
+        let sendData = {name:name}
+        let xml = new XMLHttpRequest()
+        xml.open("POST","/register")
+        xml.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xml.onload = function(){
+            if(this.status == 200){
+                location.href = "/run"
+            }else if(this.status == 400){
+                alert(this.responseText)
+            }
+        }
+        xml.send("name="+name)
+    }
+</script>
