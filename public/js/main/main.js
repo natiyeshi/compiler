@@ -4,48 +4,83 @@ editor.session.setMode("ace/mode/python");
 document.getElementById('editor').style.fontSize='17px';
 editor.setReadOnly(false);
 
-ace.config.set("basePath", "https://url.to.a/folder/that/contains-ace-modes");
-ace.config.setModuleUrl("ace/theme/textmate", "url for textmate.js");
 let ob = {
-    cpp : "c_cpp",
-    c : "c_cpp",
-    java:"java",
-    python:"python"
+    "cpp" : "c_cpp",
+    "c++" : "c_cpp",
+    "c" : "c_cpp",
+    "java":"java",
+    "python":"python"
 }
 
 const lang = document.getElementById("lang")
+const errorClass = document.querySelector(".errorClass")
+const errorMessage = document.querySelector(".errorMessage")
 const send = document.getElementById("send")
+const progress = document.getElementById("progress")
+const progressInfo = document.querySelector(".progressInfo")
 const answer = document.getElementById("answer")
 const defaultSelect = document.getElementById("defaultSelect")
-const lastSubmit = document.getElementById("lastSubmit")
+const left = document.getElementById("left")
+const right = document.getElementById("right")
+const langs = document.querySelectorAll(".langs")
 
-lang.addEventListener("change",()=>{
-   changeLang()
-})
+var lastSubmitValue = 3
+var onlineLang = "python"
+langs.forEach(element => {
+    element.addEventListener("click",()=>{
+        changeLang(ob[element.innerText],element)
+    })
+});
 
-function changeLang(val = undefined){
-    var val = val ?? ob[lang.value]
+function changeLang(val,activeElem){
+    langs.forEach(element => {
+        element.setAttribute("style","background:#f7f7f7;")
+        if(element == activeElem){
+            element.setAttribute("style","background:darkorange;")
+            onlineLang = val
+        }
+    })
     editor.session.setMode("ace/mode/"+val);
 }
 
-lastSubmit.addEventListener("change",()=>{
-    let val = lastSubmit.value
-    getLastSubmit(val)
+(function(){
+    errorClass.setAttribute("style","background:#9B9B9B;")
+    document.querySelector(".langs").setAttribute("style","background:darkorange;")
+})()
+
+right.addEventListener("click",()=>{
+    if(lastSubmitValue > 0)
+        return getLastSubmit(lastSubmitValue--)
+    else 
+        return getLastSubmit(lastSubmitValue = 0)
+
 })
+
+left.addEventListener("click",()=>{
+    if(lastSubmitValue < 3)
+        return getLastSubmit(lastSubmitValue++)
+    else 
+        return getLastSubmit(lastSubmitValue = 2)
+
+})
+
+
 
 send.addEventListener("click",()=>{
-    let language = ob[lang.value]
+    lastSubmitValue = 0
     let code = editor.getValue()
-   sendCode(language,code)
+   sendCode(onlineLang,code)
 })
 
+
 function sendCode(lang,code) {
+   progress.value = 0
    let xml = new XMLHttpRequest()
    xml.open("post","/run")
    xml.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
    xml.onload = function(){
     if(this.status == 200){
-        const {result} =JSON.parse(this.responseText)
+        const {result,error} =JSON.parse(this.responseText)
         let ress = result.split("\n")
         ress = ress.join("")
         answer.innerText = ress
@@ -53,8 +88,16 @@ function sendCode(lang,code) {
         answer.style.backgroundImage = ""
         send.value = "submit"
         send.setAttribute("class","btn btn-success")
-
-    } 
+        progress.value = 100
+        progressInfo.innerHTML = "compiled"
+        if(error == true){
+            errorMessage.innerHTML = "Run time error"
+            errorClass.setAttribute("style","background:#d9534f;")
+        } else{
+            errorMessage.innerHTML = "Compiled Successfully"
+            errorClass.setAttribute("style","background:#5cb85c;")
+        }
+    }  
     
    }
    
@@ -64,7 +107,11 @@ function sendCode(lang,code) {
     answer.style.backgroundImage = "url('./image/Spinner-1s-200px-unscreen.gif')"
     answer.style.backgroundRepeat = "no-repeat"
     answer.style.backgroundSize = "auto"
+    errorClass.setAttribute("style","background:#9B9B9B;")
     answer.style.backgroundPosition = "center"
+    progress.value = 35
+    errorMessage.innerHTML = "on progress ..."
+    progressInfo.innerHTML = "compiling ..."
    })
    let c = {
     lang:lang,
@@ -87,14 +134,15 @@ function getLastSubmit(val){
     xml.onload = function(){
         if(this.status == 200){
             const fileSend = JSON.parse(this.responseText)
+            console.log(fileSend);
             if(fileSend.err == true){
                 return alert("Something happend")
             }
-            if(fileSend.value[val-1] == undefined){
-                return alert("not available")
+            if(fileSend.value[val] == undefined){
+                // return alert("not available")
             }
-            editor.setValue(fileSend.value[val-1].code);
+            editor.setValue(fileSend.value[val].code);
         }
     }
     xml.send(JSON.stringify(file))
-}
+} 

@@ -1,29 +1,86 @@
 
+.header{
+    padding: 1em;
+    height: 6vh;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    margin-bottom: 2em;
+}
+.header-topic{
+    
+}
+
+.header-links{
+    position: absolute;
+    right: 0;
+    margin-right: 20%;
+    display: flex;
+    gap: 3em;
+}
 
 .main{
     display: grid;
     grid-template-rows:repeat(3,1fr);
-    height: 100vh;
+    height: 80vh;
     
+}
+
+.active{
+    background-color: darkorange !important;
 }
 
 .main-top{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 1fr 3fr 3fr;
 }
-
 #answer{
-    width: 100%;
-    height: 550px;
-    overflow-y: scroll;
+    overflow: scroll;
+}
+.answer{
+    margin: auto;
+    width: 90%;
+    height: 77vh;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
 }
 
 #editor{
+    margin: auto;
     width: 100%;
-    height: 550px;
+    height: 70vh;
 }
 
-.main-middle{
+#progress{
+    padding: 1em;
+    width: 60%;
+}
+
+.left,.right{
+    background: rgb(212, 212, 212);
+    cursor: pointer;
+ }
+
+.langs:hover{
+    background-color: rgb(241, 241, 241);
+}
+
+ .left:hover,.right:hover{
+    background: rgb(196, 196, 196);
+ }
+  
+.main-editor{
+    background-color: rgb(224, 224, 224);
+    width: 100%;
+
+}
+.main-editor-top{
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+.main-middle{ 
    margin: 1em;
    display: grid;
    justify-self: center;
