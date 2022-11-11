@@ -6,12 +6,16 @@ const session = require('express-session');
 // my modules 
 const runRouter = require('./routers/run');
 const registerRouter = require('./routers/register');
+const lastSubmit = require('./routers/lastSubmit');
 const {checkAuth,regCheck} = require('./functions/checkSession');
+
 // middle wares
 const app = express()
+const port = process.env.PORT || 5000
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 app.set("view engine","ejs")
+
 // session
 app.use(session({
     resave:false,
@@ -27,6 +31,7 @@ app.use("/image",express.static(__dirname + "public/image"))
 
 
 // urls 
+app.use("/lastSubmit",checkAuth,lastSubmit)
 app.use("/run",checkAuth,runRouter)
 app.use("/register",regCheck,registerRouter)
 
@@ -35,6 +40,6 @@ app.get("/",regCheck,(req,res)=>{
 })
 
 
-app.listen(5000,()=>{console.log("port - " + 5000);})
+app.listen(port,()=>{console.log("port - " + port);})
 
 
