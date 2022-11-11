@@ -13,6 +13,9 @@ let ob = {
     "python":"python"
 }
 
+const about = document.getElementById("about")
+const profile = document.getElementById("profile")
+const closer = document.getElementById("closer")
 const lang = document.getElementById("lang")
 const errorClass = document.querySelector(".errorClass")
 const errorMessage = document.querySelector(".errorMessage")
@@ -62,10 +65,15 @@ left.addEventListener("click",()=>{
         return getLastSubmit(lastSubmitValue++)
     else 
         return getLastSubmit(lastSubmitValue = 2)
-
+ 
 })
 
-
+about.addEventListener("click",()=>{
+    profile.style.display = "grid"
+})
+closer.addEventListener("click",()=>{
+    profile.style.display = "none"
+})
 
 send.addEventListener("click",()=>{
     lastSubmitValue = 0

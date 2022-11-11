@@ -1,28 +1,31 @@
 
+body{
+    background-image: url("../image/pattern-randomized.svg");
+    /* background-color: rgb(231, 231, 231) !important; */
+}
+
 .header{
     padding: 1em;
-    height: 6vh;
+    height: 9vh;
     display: grid;
     grid-template-columns: 20% 80%;
-    margin-bottom: 2em;
-}
+    }
 .header-topic{
-    
 }
 
 .header-links{
     position: absolute;
     right: 0;
-    margin-right: 20%;
+    margin-right: 10%;
     display: flex;
     gap: 3em;
 }
 
-.main{
+.main{ 
+    padding: 2em;
     display: grid;
-    grid-template-rows:repeat(3,1fr);
-    height: 80vh;
-    
+    grid-template-rows:1fr;
+    height:91vh;
 }
 
 .active{
@@ -41,13 +44,15 @@
     width: 90%;
     height: 77vh;
     display: grid;
-    grid-template-rows: 4fr 1fr;
+    grid-template-rows: 1fr 9fr 1fr;
 }
 
 #editor{
     margin: auto;
     width: 100%;
     height: 70vh;
+    /* box-shadow: .4em .7em 1em .6em rgb(230, 230, 230); */
+    
 }
 
 #progress{
@@ -80,19 +85,51 @@
 }
 
 
-.main-middle{ 
-   margin: 1em;
-   display: grid;
-   justify-self: center;
-   column-gap: 3em;
-   grid-template-columns:repeat(3,1fr);
-}
-
 .select,.input,.submit{
     width: fit-content;
     padding: 0;
     height: fit-content;
 }
-.main-bottom{
 
+.submit{
+    display: flex;
+    justify-content: end;
 }
+
+.profile{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: .92;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.profile-main{
+    display: flex;
+    gap: 2em;
+}
+
+.profile-link{
+    display: flex;
+    gap: 2em;
+    margin: .3em auto;
+}
+
+.main-info-head{
+    font-size: x-large;
+    color: #feb900;
+}
+.closer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 3em 3em;
+}
+

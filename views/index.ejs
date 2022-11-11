@@ -12,10 +12,9 @@
 <body>
     
     <header class="header">
-        <div class="header-topic fs-2 fw-bold">Online Compiler</div>
+        <div class="header-topic fs-3 fw-bold text-success">Online Compiler</div>
         <div class="header-links">
-            <div><a href="">about</a></div>
-            <div><a href="">contact</a></div>
+            <div id="about" class=" btn btn-primary" role="button">about</div>
         </div>
     </header>
 
@@ -39,8 +38,9 @@
                 </div>
                  <div id="editor"></div>
              </div>
-            <div class="answer bg-dark text-white">
-                <div  class="answer-top p-3" id="answer">fds</div>
+            <div class="answer  text-white">
+                <div class="answer-header bg-light text-success fs-3 fw-bold text-center">Output</div>
+                <div  class="answer-top bg-dark p-3" id="answer"></div>
                 <div class="answer-bottom border border-top-0 border-2 bg-light">
                     <div class="main-progress text-dark d-flex gap-4 justify-content-center m-auto w-100 h-50 bg-light">
                         <progress id="progress" min="0" value="100" max="100"></progress>
@@ -51,30 +51,35 @@
                     </div>
                 </div>
             </div>
+            
 
         </div>
-        <div class="main-middle">
-            <select class="select d-none" name="lang" id="lang">
-                <option value="python">python</option>
-                <option value="java">java</option>
-                <option value="cpp">C++</option>
-                <option value="c">C</option>
-            </select> 
-            <select class="lastSubmit d-none" name="lang" id="lastSubmit">
-                <option value="0" disabled selected id="defaultSelect">See your last submits</option>
-                <option value="1">last first submit</option>
-                <option value="2">last second submit</option>
-                <option value="3">last third submit</option>
-                
-            </select>
-            <input type="button" class="submit btn btn-success" value="submit" id="send">
-
+        <div class="submit m-auto w-100">
+            <input type="button" class="btn btn-success text-center mt-2 me-5 " value="submit" id="send">
         </div>
+
         
     </div>
-    
-    <script src="./js/src-min/ace.js"></script>
-    <script src="./js/main/main.js"></script>
+
+    <div class="profile bg-dark text-white" id="profile" style="display: none;">
+        <div class="close-profile">
+            <i id="closer" class="bi-x closer btn btn-warning"></i>
+        </div>
+        <div class="profile-main">
+            <div class="img"> <img src="./image/20210612_161206_resized.jpg" class="rounded-circle" width="100px" alt="">  </div>
+            <div class="main-info">
+                <div class="main-info-head fw-bold "> Natnael Yeshiwas</div>
+                <div class="main-info-body"> I am a Web Developer. any one interested can contact me  </div>
+                <div class="profile-link">
+                   <a href="http://t.me/Natiyeshi"><i class="bi-telegram fs-2 pl"></i></a>
+                   <a href="http://github.com/natiyeshi"><i class="bi-github fs-2 pl"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html> 
+
+<script src="./js/src-min/ace.js"></script>
+<script src="./js/main/main.js"></script>
