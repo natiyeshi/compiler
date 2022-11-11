@@ -1,8 +1,9 @@
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
+// editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/python");
 document.getElementById('editor').style.fontSize='17px';
 editor.setReadOnly(false);
+editor.setTheme("ace/theme/twilight")
 
 let ob = {
     "cpp" : "c_cpp",
