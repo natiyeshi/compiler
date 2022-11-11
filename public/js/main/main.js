@@ -1,9 +1,8 @@
 var editor = ace.edit("editor");
-// editor.setTheme("ace/theme/monokai");
+editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/python");
 document.getElementById('editor').style.fontSize='17px';
 editor.setReadOnly(false);
-editor.setTheme("ace/theme/twilight")
 
 let ob = {
     "cpp" : "c_cpp",
@@ -13,6 +12,7 @@ let ob = {
     "python":"python"
 }
 
+const dark = document.getElementById("dark")
 const about = document.getElementById("about")
 const profile = document.getElementById("profile")
 const closer = document.getElementById("closer")
@@ -69,7 +69,7 @@ left.addEventListener("click",()=>{
 })
 
 about.addEventListener("click",()=>{
-    profile.style.display = "grid"
+    profile.style.display = "flex"
 })
 closer.addEventListener("click",()=>{
     profile.style.display = "none"
@@ -80,7 +80,19 @@ send.addEventListener("click",()=>{
     let code = editor.getValue()
    sendCode(onlineLang,code)
 })
-
+var bgbool = false
+dark.addEventListener("click",()=>{
+    if(bgbool == false){
+        dark.setAttribute("class","btn btn-light")
+        dark.innerHTML = "off dark mode"
+        document.body.style.backgroundImage ="url('../../image/dark.svg')"
+    }else {
+        document.body.style.backgroundImage ='url("../image/pattern-randomized.svg")'
+        dark.setAttribute("class","btn btn-dark")
+        dark.innerHTML = "on dark mode"
+    }
+    bgbool = !bgbool
+})
 
 function sendCode(lang,code) {
    progress.value = 0
@@ -131,7 +143,7 @@ function sendCode(lang,code) {
 
 editor.session.on('change', function(delta) {
     send.setAttribute("class","btn btn-warning")
-    defaultSelect.selected = true
+    // defaultSelect.selected = true
 });
 
 
@@ -149,6 +161,7 @@ function getLastSubmit(val){
             }
             if(fileSend.value[val] == undefined){
                 // return alert("not available")
+                return
             }
             editor.setValue(fileSend.value[val].code);
         }
