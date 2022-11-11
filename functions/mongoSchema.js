@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/compiler")
+const url = "mongodb+srv://natiyeshimongo:natiyeshimongo@cluster0.aliussy.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(url)
 
 const userSchema = mongoose.Schema({ 
     name:{
