@@ -107,8 +107,8 @@ function sendCode(lang,code) {
         answer.innerText = ress
         send.disabled = false
         answer.style.backgroundImage = ""
-        send.value = "submit"
-        send.setAttribute("class","btn btn-success")
+        send.value = "submit"  
+        send.setAttribute("class","btn btn-success text-center mt-2 me-5")
         progress.value = 100
         progressInfo.innerHTML = "compiled"
         if(error == true){
@@ -142,7 +142,7 @@ function sendCode(lang,code) {
 }
 
 editor.session.on('change', function(delta) {
-    send.setAttribute("class","btn btn-warning")
+    send.setAttribute("class","btn btn-warning text-center mt-2 me-5")
     // defaultSelect.selected = true
 });
 
