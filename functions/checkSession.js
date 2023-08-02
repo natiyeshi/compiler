@@ -12,4 +12,11 @@ function regCheck(req,res,next) {
     next()
 }
 
-module.exports = {checkAuth,regCheck}
+function addition(a,b){
+    return a + b
+}
+
+module.exports = checkAuth
+module.exports = regCheck
+ans = addition(1,3)
+print(ans)
